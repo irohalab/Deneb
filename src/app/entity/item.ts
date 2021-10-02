@@ -5,7 +5,7 @@ import { Team } from './team';
 export class Item {
     id: any;
     title: string;
-    eps_no_list: number[];
+    eps_no_list: { eps_no: number, format: string }[];
     type: ItemType;
     team?: Team;
     timestampe: Date;
@@ -13,4 +13,5 @@ export class Item {
     publisher: Publisher;
     torrent_url?: string;
     magnet_uri?: string;
+    ext: string;
 }
