@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.2.0
+
+Add support for video process rules, this change need mira-video-manager to be deployed and Albireo >= 4.0.0
+
 ## 4.1.2
 
 Add a placeholder for search result of bangumi list when no result is found.

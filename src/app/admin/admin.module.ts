@@ -45,6 +45,12 @@ import { EditWebHookComponent } from './web-hook/edit-web-hook/edit-web-hook.com
 import { DpDatePickerModule } from 'ng2-date-picker';
 import { NyaaPipe } from './bangumi-pipes/nyaa-pipe';
 import { EditBangumiRecommendComponent } from './announce/edit-bangumi-recommend/edit-bangumi-recommend.component';
+import { VideoProcessRuleComponent } from './bangumi-detail/video-processs-rule/video-process-rule.component';
+import { VideoProcessRuleService } from './bangumi-detail/video-processs-rule/video-process-rule.service';
+import { VideoProcessRuleEditorComponent } from './bangumi-detail/video-processs-rule/video-process-rule-editor/video-process-rule-editor.component';
+import { VideoProcessRuleItemComponent } from './bangumi-detail/video-processs-rule/video-process-rule-item/video-process-rule-item.component';
+import { ActionTypePipe } from './bangumi-detail/video-processs-rule/action-type.pipe';
+import { ProfileTypePipe } from './bangumi-detail/video-processs-rule/profile-type.pipe';
 
 
 @NgModule({
@@ -76,7 +82,12 @@ import { EditBangumiRecommendComponent } from './announce/edit-bangumi-recommend
         WebHookCardComponent,
         EditWebHookComponent,
         EditBangumiRecommendComponent,
-        UniversalBuilderComponent
+        UniversalBuilderComponent,
+        VideoProcessRuleComponent,
+        VideoProcessRuleEditorComponent,
+        VideoProcessRuleItemComponent,
+        ActionTypePipe,
+        ProfileTypePipe
     ],
     providers: [
         AdminService,
@@ -86,7 +97,8 @@ import { EditBangumiRecommendComponent } from './announce/edit-bangumi-recommend
         UserManagerSerivce,
         AnnounceService,
         ListBangumiService,
-        WebHookService
+        WebHookService,
+        VideoProcessRuleService
     ],
     imports: [
         CommonModule,
@@ -112,7 +124,8 @@ import { EditBangumiRecommendComponent } from './announce/edit-bangumi-recommend
         EditAnnounceComponent,
         EditWebHookComponent,
         EditBangumiRecommendComponent,
-        UniversalBuilderComponent
+        UniversalBuilderComponent,
+        VideoProcessRuleEditorComponent
     ]
 })
 export class AdminModule {

@@ -13,7 +13,7 @@
     </a>
 </admin-navbar>
 <div class="bangumi-detail-container" *ngIf="bangumi && adminList">
-    <div class="bangumi-basic-info">
+    <div class="bangumi-basic-info section-card">
         <div class="cover-wrapper" *ngIf="bangumi.cover_image">
             <responsive-image
                 [src]="bangumi.cover_image.url"
@@ -82,7 +82,7 @@
         </div>
         <a class="edit-button anchor-button" (click)="editBasicInfo()"><i class="edit icon"></i></a>
     </div>
-    <div class="download-info">
+    <div class="download-info section-card">
         <h4 class="section-header">抓取来源(Universal)</h4>
         <div class="universal-entry entry" *ngFor="let universal of bangumi.universal | parseJson">
             <div class="entry-key">{{universal.mode}}</div>
@@ -100,7 +100,7 @@
             <div class="ui large loader"></div>
         </div>
     </div>
-    <div class="download-info">
+    <div class="download-info section-card">
         <h4 class="section-header">抓取来源</h4>
         <div class="ui warning message">DMHY, ACG.RIP, NYAA在未来的版本将会默认被禁用，请使用Universal</div>
         <div class="bangumi-moe-entry entry">
@@ -150,7 +150,11 @@
             </div>
         </div>
     </div>
-    <div class="bangumi-episodes">
+    <div class="video-process section-card" *ngIf="bangumi && bangumi.id">
+        <h4 class="section-header">后期处理</h4>
+        <video-process-rule [bangumiId]="bangumi.id"></video-process-rule>
+    </div>
+    <div class="bangumi-episodes section-card">
         <h4 class="section-header">各话列表</h4>
         <ul class="notice">
             <li><span class="ui green horizontal tiny label">&nbsp;</span> = 已下载</li>

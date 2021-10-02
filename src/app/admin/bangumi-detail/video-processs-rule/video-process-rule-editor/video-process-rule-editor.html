@@ -1,0 +1,66 @@
+<div class="rule-editor-modal">
+    <div class="modal-header">
+        <h4>Edit Rule</h4>
+    </div>
+    <section class="condition-section">
+        <form novalidate class="ui form" [formGroup]="basicInfoForm">
+            <div class="field">
+                <label>Rule Name</label>
+                <input type="text" formControlName="name" name="name">
+            </div>
+            <div class="field">
+                <label>Condition</label>
+                <input type="text" formControlName="condition" name="condition">
+            </div>
+        </form>
+    </section>
+    <section class="action-section">
+        <div class="action-item ui form" *ngFor="let action of actions; let $index = index">
+            <div class="fields">
+                <div class="field">
+                    <span class="action-index">#{{$index}}</span>
+                </div>
+
+                <div class="field">
+                    <div class="ui selection dropdown" uiDropdown="click">
+                        <i class="dropdown icon"></i>
+                        <div class="text default" *ngIf="!action.type">Action Type</div>
+                        <div class="text" *ngIf="action.type">{{action.type | ActionType}}</div>
+                        <div class="menu">
+                            <div class="item" (click)="action.type = eActionType.Convert">Convert Action</div>
+                            <div class="item" (click)="action.type = eActionType.Merge">Merge Action</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="field convert-action" *ngIf="action.type === eActionType.Convert">
+                    <div class="ui selection dropdown" uiDropdown="click">
+                        <i class="dropdown icon"></i>
+                        <div class="text default" *ngIf="!$any(action).profile">Profile</div>
+                        <div class="text" *ngIf="$any(action).profile">{{$any(action).profile | ProfileType}}</div>
+                        <div class="menu">
+                            <div class="item" (click)="$any(action).profile = eProfileType.Default">Default</div>
+                            <div class="item" (click)="$any(action).profile = eProfileType.SoundOnly">Sound Only</div>
+                            <div class="item" (click)="$any(action).profile = eProfileType.VideoOnly">Video Only</div>
+                            <div class="item" (click)="$any(action).profile = eProfileType.Custom">Custom</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="field profile-data" *ngIf="$any(action).profile === eProfileType.SoundOnly">
+                    <input type="text" [(ngModel)]="$any(action).profileExtraData" name="preferredTrack" placeholder="Preferred Track"/>
+                </div>
+                <div class="field profile-data" *ngIf="$any(action).profile === eProfileType.VideoOnly"></div>
+            </div>
+            <div class="field profile-data" *ngIf="$any(action).profile === eProfileType.Custom">
+                <input type="text" [(ngModel)]="$any(action).profileExtraData" name="command" placeholder="ffmpeg command">
+            </div>
+        </div>
+        <div class="add-action-button">
+            <a class="anchor-button" (click)="addAction()"><i class="plus icon"></i>Add Action</a>
+        </div>
+    </section>
+    <div class="footer">
+        <button class="ui button primary" (click)="save()">Save</button>
+        <button class="ui button" (click)="cancel()">Cancel</button>
+    </div>
+</div>

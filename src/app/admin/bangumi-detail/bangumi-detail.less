@@ -8,6 +8,7 @@
   overflow-y: auto;
   background-color: #f0f0f0;
 }
+
 .anchor-button {
   cursor: pointer;
   color: #9f9f9f;
@@ -17,20 +18,25 @@
   }
 }
 
+.section-card {
+  position: relative;
+  background-color: #fff;
+  box-shadow:  0 0 2px rgba(0, 0, 0, 0.2);
+  margin: 1rem;
+  padding: 1rem 0;
+}
+
 .section-header {
   margin: 0;
   padding: 0 1rem 1rem 1.5rem;
 }
 
 .bangumi-basic-info {
-  position: relative;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: stretch;
-  margin: 1rem;
-  background-color: #fff;
-  box-shadow:  0 0 2px rgba(0, 0, 0, 0.2);
+  padding: 0;
   .cover-wrapper {
     width: 20%;
     padding: 1rem 0.5rem 1rem 1rem;
@@ -95,11 +101,6 @@
   }
 }
 .download-info {
-  position: relative;
-  margin: 1rem;
-  background-color: #fff;
-  box-shadow:  0 0 2px rgba(0, 0, 0, 0.2);
-  padding: 1rem 0;
   .ui.message {
     margin: 1rem;
   }
@@ -135,12 +136,9 @@
     margin: 0 1rem;
   }
 }
+
 .bangumi-episodes {
-  position: relative;
   margin: 1rem 1rem 6rem 1rem;
-  background-color: #fff;
-  box-shadow:  0 0 2px rgba(0, 0, 0, 0.2);
-  padding: 1rem 0;
   .notice {
     margin: 0 2rem 2rem 1.5rem;
     padding: 0;
