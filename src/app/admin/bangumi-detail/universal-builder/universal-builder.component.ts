@@ -97,11 +97,16 @@ export class UniversalBuilderComponent implements OnInit, OnDestroy {
             universalList = [];
         }
         if (this.isEdit) {
+            let found = false;
             for (let i = 0; i < universalList.length; i++) {
                 if (universalList[i].mode === result.mode) {
                     universalList[i].keyword = result.keyword;
+                    found = true;
                     break;
                 }
+            }
+            if (!found) {
+                universalList.push(result);
             }
         } else {
             universalList.push(result);
