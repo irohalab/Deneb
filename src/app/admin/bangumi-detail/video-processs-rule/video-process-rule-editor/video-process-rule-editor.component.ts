@@ -1,12 +1,20 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import {
+    AbstractControl,
+    AsyncValidatorFn,
+    FormBuilder,
+    FormControl,
+    FormGroup,
+    ValidationErrors
+} from '@angular/forms';
 import { VideoProcessRuleService } from '../video-process-rule.service';
 import { Action } from '../../../../entity/action';
 import { ActionType } from '../../../../entity/action-type';
 import { ProfileType } from '../../../../entity/ProfileType';
 import { UIDialogRef, UIToast, UIToastComponent, UIToastRef } from 'deneb-ui';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { VideoProcessRule } from '../../../../entity/VideoProcessRule';
+import { map } from 'rxjs/operators';
 
 @Component({
     selector: 'video-process-rule-editor',
@@ -49,16 +57,16 @@ export class VideoProcessRuleEditorComponent implements OnInit, OnDestroy {
         if (this.rule) {
             this.basicInfoForm = this._fb.group({
                 name: [this.rule.name],
-                condition: [this.rule.condition]
-            });
+                condition: new FormControl(this.rule.condition, {asyncValidators: this.ruleConditionValidator()})
+            }, {updateOn: 'blur'});
             this.actions = this.rule.actions;
             this.bangumiId = this.rule.bangumiId;
             this.videoId = this.rule.videoFileId;
         } else {
             this.basicInfoForm = this._fb.group({
                 name: [''],
-                condition: ['']
-            });
+                condition: new FormControl('', {asyncValidators: this.ruleConditionValidator()})
+            }, {updateOn: 'blur'});
         }
     }
 
@@ -103,5 +111,23 @@ export class VideoProcessRuleEditorComponent implements OnInit, OnDestroy {
 
     cancel(): void {
         this._dialogRef.close();
+    }
+
+    ruleConditionValidator(): AsyncValidatorFn {
+        return (control: AbstractControl) : Observable<ValidationErrors | null> => {
+            const condition = control.value;
+            return this._videoProcessRuleService.checkCondition(condition)
+                .pipe(
+                    map<any, ValidationErrors | null>(result => {
+                        if (result.status === 0) {
+                            return null;
+                        } else {
+                            return {
+                                condition: result.data
+                            }
+                        }
+                    })
+                );
+        }
     }
 }

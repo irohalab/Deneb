@@ -6,6 +6,7 @@ import { TaskManager } from './task-manager/task-manager.component';
 import { UserManager } from './user-manager/user-manager.component';
 import { AnnounceComponent } from './announce/announce.component';
 import { WebHookComponent } from './web-hook/web-hook.component';
+import { DownloadManagerComponent } from './download-manager/download-manager.component';
 
 
 export const adminRoutes: Routes = [
@@ -20,6 +21,10 @@ export const adminRoutes: Routes = [
             {
                 path: 'bangumi',
                 component: ListBangumi
+            },
+            {
+                path: 'download-manager',
+                component: DownloadManagerComponent
             },
             {
                 path: 'user',

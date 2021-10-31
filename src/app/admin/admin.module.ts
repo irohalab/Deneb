@@ -51,6 +51,10 @@ import { VideoProcessRuleEditorComponent } from './bangumi-detail/video-processs
 import { VideoProcessRuleItemComponent } from './bangumi-detail/video-processs-rule/video-process-rule-item/video-process-rule-item.component';
 import { ActionTypePipe } from './bangumi-detail/video-processs-rule/action-type.pipe';
 import { ProfileTypePipe } from './bangumi-detail/video-processs-rule/profile-type.pipe';
+import { DownloadManagerComponent } from './download-manager/download-manager.component';
+import { DownloadJobCardComponent } from './download-job-card/download-job-card.component';
+import { DownloadManagerService } from './download-manager/download-manager.service';
+import { FileMappingListComponent } from './download-job-card/file-mapping-list/file-mapping-list.component';
 
 
 @NgModule({
@@ -87,7 +91,10 @@ import { ProfileTypePipe } from './bangumi-detail/video-processs-rule/profile-ty
         VideoProcessRuleEditorComponent,
         VideoProcessRuleItemComponent,
         ActionTypePipe,
-        ProfileTypePipe
+        ProfileTypePipe,
+        DownloadManagerComponent,
+        DownloadJobCardComponent,
+        FileMappingListComponent
     ],
     providers: [
         AdminService,
@@ -98,7 +105,8 @@ import { ProfileTypePipe } from './bangumi-detail/video-processs-rule/profile-ty
         AnnounceService,
         ListBangumiService,
         WebHookService,
-        VideoProcessRuleService
+        VideoProcessRuleService,
+        DownloadManagerService
     ],
     imports: [
         CommonModule,
@@ -125,7 +133,8 @@ import { ProfileTypePipe } from './bangumi-detail/video-processs-rule/profile-ty
         EditWebHookComponent,
         EditBangumiRecommendComponent,
         UniversalBuilderComponent,
-        VideoProcessRuleEditorComponent
+        VideoProcessRuleEditorComponent,
+        FileMappingListComponent
     ]
 })
 export class AdminModule {
