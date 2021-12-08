@@ -11,7 +11,7 @@
                 <label>Rule Name</label>
                 <input type="text" formControlName="name" name="name">
             </div>
-            <div class="field" [ngClass]="{error: basicInfoForm.controls['condition'].hasError('condition')}">
+            <div class="field" *ngIf="!videoId" [ngClass]="{error: basicInfoForm.controls['condition'].hasError('condition')}">
                 <label>Condition</label>
                 <input type="text" formControlName="condition" name="condition">
             </div>

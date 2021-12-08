@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Optional, Output } from '@angular/core';
 import { VideoProcessRule } from '../../../../entity/VideoProcessRule';
 import { VideoProcessRuleService } from '../video-process-rule.service';
 import { Subscription } from 'rxjs';
@@ -19,6 +19,10 @@ export class VideoProcessRuleItemComponent implements OnInit, OnDestroy {
     @Input()
     rule: VideoProcessRule;
 
+    @Optional()
+    @Input()
+    videoFileId?: string;
+
     eProfileType = ProfileType;
 
     @Output('delete')
@@ -29,7 +33,6 @@ export class VideoProcessRuleItemComponent implements OnInit, OnDestroy {
                 toastService: UIToast) {
         this._toastRef = toastService.makeText();
     }
-
 
     editRule() {
         const dialogRef = this._dialogService.open<VideoProcessRuleEditorComponent>(VideoProcessRuleEditorComponent, { backdrop: true, stickyDialog: false});
@@ -55,6 +58,7 @@ export class VideoProcessRuleItemComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
+        this._subscription.unsubscribe();
     }
 
     ngOnInit(): void {

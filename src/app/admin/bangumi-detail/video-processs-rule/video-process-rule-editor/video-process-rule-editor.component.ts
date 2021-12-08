@@ -34,6 +34,9 @@ export class VideoProcessRuleEditorComponent implements OnInit, OnDestroy {
     @Input()
     rule: VideoProcessRule;
 
+    @Input()
+    saveOnClose: boolean = false;
+
     basicInfoForm: FormGroup;
 
     actions: Action[];
@@ -78,34 +81,43 @@ export class VideoProcessRuleEditorComponent implements OnInit, OnDestroy {
     }
 
     save(): void {
-        const condition = this.basicInfoForm.value.condition;
+        let condition: string|null = this.videoId ? null : this.basicInfoForm.value.condition;
         const name = this.basicInfoForm.value.name;
         if (this.rule) {
             this.rule.name = name;
             this.rule.condition = condition;
-            this._subscription.add(
-                this._videoProcessRuleService
-                    .editRule(this.rule)
-                    .subscribe((rule) => {
-                        this._toastRef.show('Update Successful');
-                        this._dialogRef.close(rule);
-                    })
-            );
+            if (this.saveOnClose) {
+                this._subscription.add(
+                    this._videoProcessRuleService
+                        .editRule(this.rule)
+                        .subscribe((rule) => {
+                            this._toastRef.show('Update Successful');
+                            this._dialogRef.close(rule);
+                        })
+                );
+            } else {
+                this._dialogRef.close(this.rule);
+            }
         } else {
-            this._subscription.add(
-                this._videoProcessRuleService.addRule({
-                    name: name,
-                    bangumiId: this.bangumiId,
-                    videoFileId: this.videoId,
-                    condition: condition,
-                    actions: this.actions,
-                    priority: 0
-                })
-                    .subscribe((rule) => {
-                        this._toastRef.show('Add Successful');
-                        this._dialogRef.close(rule);
-                    })
-            );
+            const rule = {
+                name: name,
+                bangumiId: this.bangumiId,
+                videoFileId: this.videoId,
+                condition: condition,
+                actions: this.actions,
+                priority: 0
+            } as VideoProcessRule;
+            if (this.saveOnClose) {
+                this._subscription.add(
+                    this._videoProcessRuleService.addRule(rule)
+                        .subscribe((rule) => {
+                            this._toastRef.show('Add Successful');
+                            this._dialogRef.close(rule);
+                        })
+                );
+            } else {
+                this._dialogRef.close(rule);
+            }
         }
     }
 

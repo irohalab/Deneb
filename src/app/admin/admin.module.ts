@@ -55,6 +55,9 @@ import { DownloadManagerComponent } from './download-manager/download-manager.co
 import { DownloadJobCardComponent } from './download-job-card/download-job-card.component';
 import { DownloadManagerService } from './download-manager/download-manager.service';
 import { FileMappingListComponent } from './download-job-card/file-mapping-list/file-mapping-list.component';
+import { VideoProcessManagerComponent } from './video-process-manager/video-process-manager.component';
+import { VideoProcessManagerService } from './video-process-manager/video-process-manager.service';
+import { VideoProcessJobCardComponent } from './video-process-job-card/video-process-job-card.component';
 
 
 @NgModule({
@@ -94,7 +97,9 @@ import { FileMappingListComponent } from './download-job-card/file-mapping-list/
         ProfileTypePipe,
         DownloadManagerComponent,
         DownloadJobCardComponent,
-        FileMappingListComponent
+        FileMappingListComponent,
+        VideoProcessManagerComponent,
+        VideoProcessJobCardComponent
     ],
     providers: [
         AdminService,
@@ -106,7 +111,8 @@ import { FileMappingListComponent } from './download-job-card/file-mapping-list/
         ListBangumiService,
         WebHookService,
         VideoProcessRuleService,
-        DownloadManagerService
+        DownloadManagerService,
+        VideoProcessManagerService
     ],
     imports: [
         CommonModule,

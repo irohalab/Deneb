@@ -8,6 +8,10 @@
     </div>
     <div class="ui segment" *ngFor="let videoFileFormGroup of videoFileList">
         <form class="ui form" [formGroup]="videoFileFormGroup">
+            <h4 class="ui horizontal divider header">
+                <i class="tag icon"></i>
+                Basic Info for Video file
+            </h4>
             <div class="field">
                 <label>id</label>
                 <input type="text" formControlName="id" readonly>
@@ -61,9 +65,25 @@
                     </div>
                 </div>
             </div>
+            <h4 class="ui horizontal divider header">
+                <i class="bar chart icon"></i>
+                Video Process Rule
+            </h4>
+            <section class="video-rule">
+                <div class="section-title"></div>
+                <div class="rule-list">
+                    <video-process-rule-item *ngIf="videoFileFormGroup.value.id && ruleMap[videoFileFormGroup.value.id] && ruleMap[videoFileFormGroup.value.id].rule"
+                                             [rule]="ruleMap[videoFileFormGroup.value.id].rule" (delete)="deleteRule(videoFileFormGroup.value.id)">
+                    </video-process-rule-item>
+                </div>
+                <div class="add-rule-button" *ngIf="videoFileFormGroup.value.id && !ruleMap[videoFileFormGroup.value.id]">
+                    <a class="anchor-button" (click)="onAddRule(videoFileFormGroup)"><i class="plus icon"></i>Add Rule</a>
+                </div>
+            </section>
             <div class="field">
                 <button class="ui red button" confirmDialog dialogTitle="确定删除吗，该操作无法撤销" (onConfirm)="deleteVideoFile(videoFileFormGroup)">删除</button>
-                <button class="ui primary button" (click)="saveVideoFile(videoFileFormGroup)" [disabled]="videoFileFormGroup.pristine">保存</button>
+                <button class="ui primary button" (click)="saveVideoFile(videoFileFormGroup)"
+                        [disabled]="videoFileFormGroup.pristine && (!ruleMap[videoFileFormGroup.value.id] || !ruleMap[videoFileFormGroup.value.id].isDirty)">保存</button>
             </div>
         </form>
     </div>

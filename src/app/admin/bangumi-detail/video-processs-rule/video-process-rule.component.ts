@@ -27,6 +27,7 @@ export class VideoProcessRuleComponent implements OnInit, OnDestroy {
             stickyDialog: false, backdrop: true
         });
         editRuleDialogRef.componentInstance.bangumiId = this.bangumiId;
+        editRuleDialogRef.componentInstance.saveOnClose = true;
         editRuleDialogRef.afterClosed()
             .pipe(filter(result => !!result))
             .subscribe(() => {
@@ -39,7 +40,7 @@ export class VideoProcessRuleComponent implements OnInit, OnDestroy {
             this._videoProcessRuleService
                 .listRulesByBangumi(this.bangumiId)
                 .subscribe((list) => {
-                    this.videoProcessRuleList = list;
+                    this.videoProcessRuleList = list.filter(rule => !rule.videoFileId);
                 })
         );
     }

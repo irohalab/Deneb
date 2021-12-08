@@ -9,8 +9,8 @@
     </div>
     <div class="ui bottom attached progress" [ngClass]="{
         success: job.status === mJobStatus.Complete,
-        active: job.status === mJobStatus.Downloading,
         blue: job.status === mJobStatus.Downloading,
+        teal: job.status === mJobStatus.Pending,
         warning: job.status === mJobStatus.Paused,
         error: job.status === mJobStatus.Error,
         disabled: job.status === mJobStatus.Removed}">
