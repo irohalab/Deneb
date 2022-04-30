@@ -1,9 +1,11 @@
 import { Injectable, NgZone } from '@angular/core';
 import { Observable } from 'rxjs';
 import { isChrome, isEdge, isFirefox } from '../../helpers/browser-detect';
+import { PersistStorage } from '../user-service';
 
 const MESSAGE_TYPE_EXT = 'SADR_FROM_EXT';
 const MESSAGE_TYPE_PAGE = 'SADR_FROM_PAGE';
+export const CHROME_EXT_ID_KEY = 'chrome_ext_id';
 
 export interface RPCMessage {
     extensionId: string;
@@ -46,13 +48,18 @@ export class ExtensionRpcService {
     private messageMap = new Map<number, MessageStub>();
     private _ID = 0;
     private defaultTimeout = 30000;
-    private readonly _extensionId = null;
+    private _extensionId = null;
 
-    constructor(private _ngZone: NgZone) {
+    constructor(private _ngZone: NgZone, private _persistStorage: PersistStorage) {
         if (isFirefox) {
             this._extensionId = FIREFOX_EXTENSION_ID;
         } else if (isChrome) {
-            this._extensionId = CHROME_EXTENSION_ID;
+            const idFromLocalStorage = this._persistStorage.getItem(CHROME_EXT_ID_KEY, null);
+            if (idFromLocalStorage) {
+                this._extensionId = idFromLocalStorage;
+            } else {
+                this._extensionId = CHROME_EXTENSION_ID;
+            }
         } else if (isEdge) {
             this._extensionId = EDGE_EXTENSION_ID;
         }

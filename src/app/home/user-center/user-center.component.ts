@@ -2,7 +2,7 @@
 import {filter, mergeMap} from 'rxjs/operators';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { User } from '../../entity';
-import { UserService } from '../../user-service';
+import { PersistStorage, UserService } from '../../user-service';
 import { Subscription } from 'rxjs';
 import { UIToast, UIToastComponent, UIToastRef } from 'deneb-ui';
 import { BaseError } from '../../../helpers/error';
@@ -13,6 +13,7 @@ import { UserCenterService } from './user-center.service';
 import { WebHook } from '../../entity/web-hook';
 import { Title } from '@angular/platform-browser';
 import { ChromeExtensionService, ENABLED_STATUS } from '../../browser-extension/chrome-extension.service';
+import { CHROME_EXT_ID_KEY } from '../../browser-extension/extension-rpc.service';
 
 export const MAIL_SEND_INTERVAL = 60;
 
@@ -55,6 +56,7 @@ export class UserCenter implements OnInit, OnDestroy {
 
     emailForm: FormGroup;
     passwordForm: FormGroup;
+    chromeExtensionIdForm: FormGroup;
 
     emailFormErrors = {
         current_pass: [],
@@ -78,6 +80,7 @@ export class UserCenter implements OnInit, OnDestroy {
                 private _userCenterService: UserCenterService,
                 private _fb: FormBuilder,
                 private _chromeExtensionService: ChromeExtensionService,
+                private _persistStorage: PersistStorage,
                 titleService: Title,
                 toastService: UIToast) {
         titleService.setTitle(`用户设置 - ${SITE_TITLE}`);
@@ -207,6 +210,11 @@ export class UserCenter implements OnInit, OnDestroy {
         );
     }
 
+    updateChromeExtensionId() {
+        const chromeExtensionId = this.chromeExtensionIdForm.value.extId;
+        this._persistStorage.setItem(CHROME_EXT_ID_KEY, chromeExtensionId);
+    }
+
     resendMail() {
 
         this._subscription.add(
@@ -249,7 +257,9 @@ export class UserCenter implements OnInit, OnDestroy {
             new_password: ['', Validators.required],
             new_password_repeat: ['', Validators.required]
         }, {validator: passwordMatch('new_password', 'new_password_repeat')});
-
+        this.chromeExtensionIdForm = this._fb.group({
+            chromeExtensionId: ['', Validators.required]
+        });
         // this._subscription.add(
         //     this.emailForm.valueChanges.subscribe(
         //         () => {

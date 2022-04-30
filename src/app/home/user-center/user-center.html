@@ -124,6 +124,21 @@
             <a class="ui primary button" routerLink="/settings/web-hook">寻找Web Hook</a>
         </div>
     </div>
+    <div class="ui segment">
+        <h4>Chrome Extension ID</h4>
+        <div class="ui message">
+            由于Chrome商店的policy，chrome的bangumi扩展一直无法重新上架。请<a href="/video/preview-video/chrome.zip" target="_blank">下载zip包</a>然后解压，
+            然后在Chrome中加载该插件然后解压，之后在chrome://extensions，点击右上角开发者模式的开关，
+            打开开发者模式，然后点击左边的“加载已解压的扩展程序”选择下载的文件夹，找到id之后填入下方然后刷新页面。
+        </div>
+        <form class="ui form" novalidate [formGroup]="chromeExtensionIdForm">
+            <div class="field">
+                <label>Chrome Extension Id</label>
+                <input type="text" formControlName="extId" autocomplete="off">
+            </div>
+            <button class="ui button" type="button" (click)="updateChromeExtensionId()">更新</button>
+        </form>
+    </div>
     <div class="ui active dimmer" *ngIf="isAddingWebHook">
         <div class="ui large text loader">
             正在添加Web Hook
