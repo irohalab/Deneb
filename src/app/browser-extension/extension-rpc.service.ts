@@ -55,6 +55,7 @@ export class ExtensionRpcService {
             this._extensionId = FIREFOX_EXTENSION_ID;
         } else if (isChrome) {
             const idFromLocalStorage = this._persistStorage.getItem(CHROME_EXT_ID_KEY, null);
+            console.log(`id from local storage ${idFromLocalStorage}`);
             if (idFromLocalStorage) {
                 this._extensionId = idFromLocalStorage;
             } else {
