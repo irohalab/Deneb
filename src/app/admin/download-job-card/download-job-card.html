@@ -1,11 +1,11 @@
 <div class="ui segment">
     <div class="card-content">
         <div class="job-id ui label">JOB ID: {{job.id}}</div>
-        <div class="bangumi-name">
+        <div class="bangumi-name" *ngIf="!!job.bangumi">
             Bangumi:
             <a class="bangumi-link" [routerLink]="['/admin/bangumi', job.bangumiId]">{{job.bangumi.name}}</a>
         </div>
-        <a class="file-mapping anchor-button" (click)="onViewFileMapping()">View FileMapping</a>
+        <a *ngIf="!!job.bangumi" class="file-mapping anchor-button" (click)="onViewFileMapping()">View FileMapping</a>
     </div>
     <div class="ui bottom attached progress" [ngClass]="{
         success: job.status === mJobStatus.Complete,
