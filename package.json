@@ -1,6 +1,6 @@
 {
   "name": "Deneb",
-  "version": "4.3.0",
+  "version": "4.3.1",
   "description": "Web client for Albireo",
   "author": "Nyasoft<about@nya.io>",
   "homepage": "https://github.com/irohalab/Deneb",
@@ -47,6 +47,7 @@
     "@angular/platform-browser-dynamic": "~8.2.10",
     "@angular/platform-server": "~8.2.10",
     "@angular/router": "~8.2.10",
+    "@egjs/agent": "^2.4.0",
     "core-js": "~2.6",
     "deneb-ui": "^1.0.0",
     "downloadjs": "^1.4.7",

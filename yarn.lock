@@ -112,6 +112,11 @@
   dependencies:
     regenerator-runtime "^0.13.2"
 
+"@egjs/agent@^2.4.0":
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/@egjs/agent/-/agent-2.4.0.tgz#37841a729291713c65537e2ff31f01e11ace496e"
+  integrity sha512-yWp+4lypso3sRe21QATjBt+DIkdtKhcyYnNuXePsd8fP5XreGSEMe92vGJzSNytGORPwgcuRjPYZ/KBgg9giVw==
+
 "@hapi/address@2.x.x":
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@hapi/address/-/address-2.0.0.tgz#9f05469c88cb2fd3dcd624776b54ee95c312126a"

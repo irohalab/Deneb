@@ -129,6 +129,11 @@ export class UserCenter implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.buildForm();
+        const chromeExtId = this._persistStorage.getItem(CHROME_EXT_ID_KEY, null);
+        if (chromeExtId) {
+            this.chromeExtensionIdForm.patchValue({extId: chromeExtId});
+        }
+
         this._subscription.add(
             this._userSerivce.userInfo.pipe(
                 filter(user => !!user))
@@ -258,7 +263,7 @@ export class UserCenter implements OnInit, OnDestroy {
             new_password_repeat: ['', Validators.required]
         }, {validator: passwordMatch('new_password', 'new_password_repeat')});
         this.chromeExtensionIdForm = this._fb.group({
-            chromeExtensionId: ['', Validators.required]
+            extId: ['', Validators.required]
         });
         // this._subscription.add(
         //     this.emailForm.valueChanges.subscribe(
