@@ -1,5 +1,17 @@
 # Changelog
 
+## 4.3.2
+
+Fix favorite chooser cannot delete favorite status.
+
+## 4.3.1
+
+Fix a bug in 4.3.0
+
+## 4.3.0
+
+Allow input extension id for user unblock the chrome user from using the Sadr extension without web store
+
 ## 4.2.0
 
 Add support for video process rules, this change need mira-video-manager to be deployed and Albireo >= 4.0.0
